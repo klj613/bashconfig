@@ -4,4 +4,5 @@
 
 eval $(ssh-agent)
 
+pulseaudio --start
 startx
