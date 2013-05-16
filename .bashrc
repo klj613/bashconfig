@@ -13,30 +13,39 @@ parse_git_info() {
     branch=$(get_git_branch)
 
     if [ ${#branch} -gt 0 ]; then
-        echo "\342\224\200[\
-\[\033[0;34m\]$(get_git_branch)\
- \033[0;36m\]$(get_current_sha)\
-\033[0;37m\]]"
+        echo "$WHITE$LINE[$BLUE$(get_git_branch) $DULL_YELLOW$(get_current_sha)$WHITE]"
     fi
 }
 
 parse_path_info() {
-    echo "\342\224\200[\[\033[0;32m\]\w\[\033[0;37m\]]"
+    echo "$LINE$WHITE[$GREEN\w$WHITE]"
 }
 
 parse_user_info() {
-    echo "\[\033[0;37m\]\342\224\214\342\224\200\
-\$([[ \$? != 0 ]] && echo \"[\[\033[0;31m\]\342\234\227\[\033[0;37m\]]\342\224\200\")[\
-$(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]\u\[\033[0;37m\]@\[\033[0;96m\]\h'; fi)\
-\[\033[0;37m\]]"
+    echo "$WHITE$TOP_LEFT_CORNER$LINE\
+\$([[ \$? != 0 ]] && echo \"$WHITE[$RED\342\234\227$WHITE]\")\
+$WHITE[$(if [[ ${EUID} == 0 ]]; then echo "$RED\h"; else echo "$DARK_YELLOW\u$WHITE@$LIGHT_YELLOW\h"; fi)$WHITE]"
 }
 
 set_bash_prompt() {
+    TOP_LEFT_CORNER="\342\224\214"
+    BOTTOM_LEFT_CORNER="\342\224\224"
+    SQUARE="\342\225\274"
+    LINE="\342\224\200"
+    WHITE="\[\033[0;37m\]"
+    GREEN="\[\033[0;32m\]"
+    RED="\[\033[0;31m\]"
+    DARK_YELLOW="\[\033[0;33m\]"
+    LIGHT_YELLOW="\[\033[0;96m\]"
+    DULL_YELLOW="\033[0;36m\]"
+    BLUE="\[\033[0;34m\]"
+    CLEARER="\[\033[0;37m\]"
+
     PS1="\
 $(parse_user_info)\
 $(parse_path_info)\
 $(parse_git_info)\
-\n\[\033[0;37m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]"
+\n$WHITE$BOTTOM_LEFT_CORNER$LINE$LINE$SQUARE $CLEARER"
 }
 
 PROMPT_COMMAND=set_bash_prompt
