@@ -32,14 +32,25 @@ set_bash_prompt() {
     BOTTOM_LEFT_CORNER="\342\224\224"
     SQUARE="\342\225\274"
     LINE="\342\224\200"
-    WHITE="\[\033[0;37m\]"
-    GREEN="\[\033[0;32m\]"
-    RED="\[\033[0;31m\]"
-    DARK_YELLOW="\[\033[0;33m\]"
-    LIGHT_YELLOW="\[\033[0;96m\]"
-    DULL_YELLOW="\033[0;36m\]"
-    BLUE="\[\033[0;34m\]"
     CLEARER="\[\033[0;37m\]"
+    SSH_COLOR="\[\033[1;31m\]"
+
+    if [ -n "$SSH_CLIENT" ]; then
+        WHITE=$SSH_COLOR
+        GREEN=$SSH_COLOR
+        DARK_YELLOW=$SSH_COLOR
+        LIGHT_YELLOW=$SSH_COLOR
+        DULL_YELLOW=$SSH_COLOR
+        BLUE=$SSH_COLOR
+    else
+        RED="\[\033[0;31m\]"
+        WHITE="\[\033[0;37m\]"
+        GREEN="\[\033[0;32m\]"
+        DARK_YELLOW="\[\033[0;33m\]"
+        LIGHT_YELLOW="\[\033[0;96m\]"
+        DULL_YELLOW="\033[0;36m\]"
+        BLUE="\[\033[0;34m\]"
+    fi
 
     PS1="\
 $(parse_user_info)\
