@@ -10,10 +10,14 @@ get_current_sha() {
 }
 
 parse_git_info() {
-    echo "\342\224\200[\
-\[\033[0;34m\]\$(get_git_branch)\
- \033[0;36m\]\$(get_current_sha)\
+    branch=$(get_git_branch)
+
+    if [ ${#branch} -gt 0 ]; then
+        echo "\342\224\200[\
+\[\033[0;34m\]$(get_git_branch)\
+ \033[0;36m\]$(get_current_sha)\
 \033[0;37m\]]"
+    fi
 }
 
 parse_path_info() {
@@ -27,11 +31,15 @@ $(if [[ ${EUID} == 0 ]]; then echo '\[\033[0;31m\]\h'; else echo '\[\033[0;33m\]
 \[\033[0;37m\]]"
 }
 
-PS1="\
+set_bash_prompt() {
+    PS1="\
 $(parse_user_info)\
 $(parse_path_info)\
 $(parse_git_info)\
 \n\[\033[0;37m\]\342\224\224\342\224\200\342\224\200\342\225\274 \[\033[0m\]"
+}
+
+PROMPT_COMMAND=set_bash_prompt
 
 alias ls='ls --color=auto'
 alias ll='ls -alF'
