@@ -63,3 +63,4 @@ PROMPT_COMMAND=set_bash_prompt
 
 alias ls='ls --color=auto'
 alias ll='ls -alF'
+alias grep='grep --color'
