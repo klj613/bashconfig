@@ -1,5 +1,3 @@
-#!/bin/bash
-
 function container_exists() {
     sudo docker ps -a | sed 1d | sed 's/ *$//g' | grep $1\$ > /dev/null
 }

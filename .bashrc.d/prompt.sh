@@ -1,5 +1,3 @@
-#!/bin/bash
-
 get_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'
 }
@@ -59,5 +57,3 @@ $(parse_git_info)\
 }
 
 PROMPT_COMMAND=set_bash_prompt
-
-
