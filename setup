@@ -1,5 +1,14 @@
 #!/bin/sh
 
-ln -s `pwd`/.bashrc $HOME/.bashrc
-ln -s `pwd`/.bashrc.d $HOME/.bashrc.d
-ln -s `pwd`/.bash_profile $HOME/.bash_profile
+if [ -n "$1" ]; then
+    DIR=$1
+else
+    DIR=$HOME
+fi
+
+rm $DIR/.bashrc
+rm $DIR/.bash_profile
+
+ln -s `pwd`/.bashrc $DIR/.bashrc
+ln -s `pwd`/.bashrc.d $DIR/.bashrc.d
+ln -s `pwd`/.bash_profile $DIR/.bash_profile
