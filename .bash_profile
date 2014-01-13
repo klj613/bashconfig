@@ -2,7 +2,8 @@
 
 [[ ! -z "$TMUX" ]] && return
 
-eval $(ssh-agent)
-
-pulseaudio --start
-startx ; vlock
+if [[ -z $DISPLAY ]] && [[ $(tty) = /dev/tty1 ]]; then
+    eval $(ssh-agent)
+    pulseaudio --start
+    startx ; vlock
+fi
