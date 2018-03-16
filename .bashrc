@@ -10,9 +10,3 @@ case "$TERM" in
         TERM=rxvt-unicode
         ;;
 esac
-
-genpasswd() {
-    local L=$1
-    [ "$L" == "" ] && L=16
-    echo $(openssl rand -base64 $L)
-}
