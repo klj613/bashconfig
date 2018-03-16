@@ -7,6 +7,7 @@ else
 fi
 
 rm $DIR/.bashrc
+rm $DIR/.bashrc.d
 rm $DIR/.bash_profile
 
 ln -s `pwd`/.bashrc $DIR/.bashrc
